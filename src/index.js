@@ -39,12 +39,12 @@ const getTest = ({ name, withTest, path }) => {
 };
 
 const createComponent = ({ name, component, style, index, test, path }) => {
-    mkdirSync(`src/${path}`, { recursive: true });
-    writeFileSync(`src/${path}/${name}.js`, component);
-    writeFileSync(`src/${path}/style.js`, style);
-    writeFileSync(`src/${path}/index.js`, index);
-    test && mkdirSync(`src/${path}/__tests__`, { recursive: true });
-    test && writeFileSync(`src/${path}/__tests__/${name}.test.js`, test);
+    mkdirSync(`src/${path}/${name}`, { recursive: true });
+    writeFileSync(`src/${path}/${name}/${name}.js`, component);
+    writeFileSync(`src/${path}/${name}/style.js`, style);
+    writeFileSync(`src/${path}/${name}/index.js`, index);
+    test && mkdirSync(`src/${path}/${name}/__tests__`, { recursive: true });
+    test && writeFileSync(`src/${path}/${name}/__tests__/${name}.test.js`, test);
 };
 
 initializeComponent();
