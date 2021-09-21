@@ -1,4 +1,4 @@
-import React from "react";
+const componentWithRedux = `import React from "react";
 import { createSelector } from "reselect";
 import { useDispatch, useSelector } from "react-redux";
 import * as S from "./style";
@@ -14,3 +14,6 @@ export default NAME;
 
 const getState = (state) => state;
 const selectState = createSelector([getState], (state) => state);
+`;
+
+module.exports = { componentWithRedux };

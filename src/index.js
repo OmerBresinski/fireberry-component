@@ -1,7 +1,12 @@
 #!/usr/bin/env node
 const inquirer = require("inquirer");
-const { readFileSync, writeFileSync, mkdirSync } = require("fs");
 const { QUESTIONS } = require("./questions");
+const { writeFileSync, mkdirSync } = require("fs");
+const { test } = require("./config/fireberryComponent/test.js");
+const { index } = require("./config/fireberryComponent/index.js");
+const { style } = require("./config/fireberryComponent/style.js");
+const { component } = require("./config/fireberryComponent/component.js");
+const { componentWithRedux } = require("./config/fireberryComponent/componentWithRedux.js");
 
 const initializeComponent = async () => {
     try {
@@ -16,21 +21,21 @@ const initializeComponent = async () => {
 };
 
 const getComponentTemplate = ({ name, withRedux }) => {
-    const index = readFileSync("src/config/fireberryComponent/index.js", "utf8").replace(/NAME/g, name);
-    const style = readFileSync("src/config/fireberryComponent/style.js", "utf8").replace(/NAME/g, name);
+    const parsedIndexFileContent = index.replace(/NAME/g, name);
+    const parsedStyleFileContent = style.replace(/NAME/g, name);
     if (withRedux === "Yes") {
-        const component = readFileSync("src/config/fireberryComponent/componentWithRedux.js", "utf8").replace(/NAME/g, name);
-        return { component, style, index };
+        const parsedComponentWithReduxFileContent = componentWithRedux.replace(/NAME/g, name);
+        return { component: parsedComponentWithReduxFileContent, style: parsedStyleFileContent, index: parsedIndexFileContent };
     } else {
-        const component = readFileSync("src/config/fireberryComponent/component.js", "utf8").replace(/NAME/g, name);
-        return { component, style, index };
+        const parsedComponentFileContent = component.replace(/NAME/g, name);
+        return { component: parsedComponentFileContent, style: parsedStyleFileContent, index: parsedIndexFileContent };
     }
 };
 
 const getTest = ({ name, withTest, path }) => {
     if (withTest === "No") return { test: undefined };
-    const test = readFileSync("src/config/fireberryComponent/test.js", "utf8").replace(/NAME/g, name).replace(/PATH/g, path);
-    return { test };
+    const parsedTestFileContent = test.replace(/NAME/g, name).replace(/PATH/g, path);
+    return { test: parsedTestFileContent };
 };
 
 const createComponent = ({ name, component, style, index, test, path }) => {

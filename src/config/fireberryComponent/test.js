@@ -1,4 +1,4 @@
-import React from "react";
+const test = `import React from "react";
 import { render } from "tests";
 import NAME from "PATH/NAME";
 
@@ -7,3 +7,6 @@ describe("NAME", () => {
         render(<NAME />);
     });
 });
+`;
+
+module.exports = { test };
